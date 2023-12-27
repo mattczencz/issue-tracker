@@ -1,7 +1,13 @@
+'use client';
+
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { AiFillBug } from 'react-icons/ai';
+import classNames from 'classnames';
 
 const Navbar = () => {
+  const pathname = usePathname();
+
   const links = [
     { label: 'Dashboard', href: '/dashboard' },
     { label: 'Issues', href: '/issues' },
@@ -14,7 +20,15 @@ const Navbar = () => {
       <ul className="flex gap-4 items-center">
         {links.map(link => (
           <li key={link.href}>
-            <Link href={link.href} className="nav-link">{link.label}</Link>
+            <Link
+              href={link.href}
+              className={classNames({
+                'text-zinc-900': link.href === pathname,
+                'text-zinc-500': link.href !== pathname
+              }, 'nav-link')}
+            >
+              {link.label}
+            </Link>
           </li>
         ))}
       </ul>
