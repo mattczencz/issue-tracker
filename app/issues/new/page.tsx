@@ -8,8 +8,8 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import createIssueSchema, { TIssueForm } from '@/app/api/issues/createIssueSchema';
-import ErrorMessage from './_components/ErrorMessage';
-import Spinner from './_components/Spinner';
+import ErrorMessage from '@/app/components/ErrorMessage';
+import Spinner from '@/app/components/Spinner';
 
 const NewIssuePage = () => {
   const { register, control, handleSubmit, formState: { errors } } = useForm<TIssueForm>({
