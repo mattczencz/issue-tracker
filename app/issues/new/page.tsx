@@ -1,15 +1,14 @@
 'use client';
-import SimpleMDE from 'react-simplemde-editor';
-import 'easymde/dist/easymde.min.css';
+import createIssueSchema, { TIssueForm } from '@/app/api/issues/createIssueSchema';
+import { ErrorMessage, Spinner } from '@/app/components';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Callout, TextField } from '@radix-ui/themes';
-import { useForm, Controller } from 'react-hook-form';
 import axios from 'axios';
+import 'easymde/dist/easymde.min.css';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { zodResolver } from '@hookform/resolvers/zod';
-import createIssueSchema, { TIssueForm } from '@/app/api/issues/createIssueSchema';
-import ErrorMessage from '@/app/components/ErrorMessage';
-import Spinner from '@/app/components/Spinner';
+import { Controller, useForm } from 'react-hook-form';
+import SimpleMDE from 'react-simplemde-editor';
 
 const NewIssuePage = () => {
   const { register, control, handleSubmit, formState: { errors } } = useForm<TIssueForm>({

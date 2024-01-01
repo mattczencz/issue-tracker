@@ -1,14 +1,9 @@
-import IssueStatusBadge from '@/app/components/IssueStatusBadge';
-import TextLink from '@/app/components/TextLink';
 import prisma from '@/prisma/client';
 import { Table } from '@radix-ui/themes';
-import delay from 'delay';
-import Link from 'next/link';
+import { TextLink, IssueStatusBadge } from '@/app/components';
 
 const IssuesTable = async () => {
   const issues = await prisma.issue.findMany();
-
-  await delay(2000);
 
   return (
     <Table.Root variant="surface">
