@@ -5,6 +5,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import Navbar from './Navbar';
 import { Container, Theme } from '@radix-ui/themes';
+import AuthProvider from './auth/provider';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -24,12 +25,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.variable}>
-        <Theme appearance="light" accentColor="jade" radius="large">
-          <Navbar />
-          <main className="p-6">
-            <Container>{children}</Container>
-          </main>
-        </Theme>
+        <AuthProvider>
+          <Theme appearance="light" accentColor="jade" radius="large">
+            <Navbar />
+            <main className="p-6">
+              <Container>{children}</Container>
+            </main>
+          </Theme>
+        </AuthProvider>
       </body>
     </html>
   );
