@@ -17,7 +17,5 @@ export async function POST(request: NextRequest) {
     }
   });
 
-  revalidatePath('/issues');
-
   return NextResponse.json(newIssue, { status: 201 });
 }

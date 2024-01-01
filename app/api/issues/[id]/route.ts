@@ -1,7 +1,6 @@
+import prisma from '@/prisma/client';
 import { NextRequest, NextResponse } from 'next/server';
 import issueSchema from '../issueSchema';
-import prisma from '@/prisma/client';
-import { revalidatePath } from 'next/cache';
 
 export async function PATCH(
   request: NextRequest,
@@ -28,8 +27,6 @@ export async function PATCH(
     }
   });
 
-  revalidatePath(`/issues/${issue.id}`);
-
   return NextResponse.json(updatedIssue);
 }
 
@@ -47,8 +44,6 @@ export async function DELETE(
   const deletedIssue = await prisma.issue.delete({
     where: { id: issue.id }
   });
-
-  revalidatePath('/issues');
 
   return NextResponse.json(deletedIssue);
 }
