@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import { AiFillBug } from 'react-icons/ai';
 import classNames from 'classnames';
 import { useSession } from 'next-auth/react';
-import { Box } from '@radix-ui/themes';
+import { Avatar, Box, Button, DropdownMenu, Flex, Text } from '@radix-ui/themes';
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -17,28 +17,58 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="flex gap-8 px-6 py-4 border-b mb-6 items-center">
-      <Link href="/" className="text-xl"><AiFillBug /></Link>
-
-      <ul className="flex gap-4 items-center">
-        {links.map(link => (
-          <li key={link.href}>
-            <Link
-              href={link.href}
-              className={classNames({
-                'text-zinc-900': link.href === pathname,
-                'text-zinc-500': link.href !== pathname
-              }, 'nav-link')}
-            >
-              {link.label}
+    <nav className="border-b mb-6 px-6 py-4">
+      <Flex justify="between">
+        <Flex align="center" gap="4">
+          <Link href="/" className="text-xl"><AiFillBug /></Link>
+          <ul className="flex gap-4 items-center">
+            {links.map(link => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className={classNames({
+                    'text-zinc-900': link.href === pathname,
+                    'text-zinc-500': link.href !== pathname
+                  }, 'nav-link')}
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </Flex>
+        <Flex align="center">
+          {status === 'unauthenticated' && (
+            <Link href="/api/auth/signin">
+              <Button className="hover:cursor-pointer">Sign In</Button>
             </Link>
-          </li>
-        ))}
-      </ul>
-      <Box>
-        {status === 'authenticated' && <Link href="/api/auth/signout">Sign Out</Link>}
-        {status === 'unauthenticated' && <Link href="/api/auth/signin">Sign In</Link>}
-      </Box>
+          )}
+          {status === 'authenticated' && (
+
+            <DropdownMenu.Root>
+              <DropdownMenu.Trigger>
+                <Avatar
+                  src={session.user!.image!}
+                  fallback="?"
+                  size="2"
+                  radius="full"
+                  className="cursor-pointer"
+                />
+              </DropdownMenu.Trigger>
+              <DropdownMenu.Content>
+                <DropdownMenu.Label>
+                  <Text size="2">
+                    {session.user!.email}
+                  </Text>
+                </DropdownMenu.Label>
+                <DropdownMenu.Item >
+                  <Link href="/api/auth/signout">Sign Out</Link>
+                </DropdownMenu.Item>
+              </DropdownMenu.Content>
+            </DropdownMenu.Root>
+          )}
+        </Flex>
+      </Flex>
     </nav>
   );
 };
