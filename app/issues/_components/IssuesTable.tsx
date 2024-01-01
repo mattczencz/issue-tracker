@@ -1,4 +1,5 @@
 import IssueStatusBadge from '@/app/components/IssueStatusBadge';
+import TextLink from '@/app/components/TextLink';
 import prisma from '@/prisma/client';
 import { Table } from '@radix-ui/themes';
 import delay from 'delay';
@@ -22,12 +23,12 @@ const IssuesTable = async () => {
         {issues.map(issue => (
           <Table.Row key={issue.id}>
             <Table.Cell>
-              <Link href={`/issues/${ issue.id }`}>
+              <TextLink href={`/issues/${ issue.id }`}>
                 {issue.title}
-                <div className="block md:hidden">
-                  <IssueStatusBadge status={issue.status} />
-                </div>
-              </Link>
+              </TextLink>
+              <div className="block md:hidden">
+                <IssueStatusBadge status={issue.status} />
+              </div>
             </Table.Cell>
             <Table.Cell className="hidden md:table-cell">
               <IssueStatusBadge status={issue.status} />
