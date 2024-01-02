@@ -1,9 +1,9 @@
 'use client';
-import createIssueSchema, { TIssueForm } from '@/app/api/issues/issueSchema';
+import issueSchema, { TIssueForm } from '@/app/api/issues/issueSchema';
 import { ErrorMessage, Spinner } from '@/app/components';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Issue } from '@prisma/client';
-import { Button, Callout, TextField } from '@radix-ui/themes';
+import { Issue, Status } from '@prisma/client';
+import { Button, Callout, Select, TextField } from '@radix-ui/themes';
 import axios from 'axios';
 import 'easymde/dist/easymde.min.css';
 import dynamic from 'next/dynamic';
@@ -15,9 +15,15 @@ const SimpleMDE = dynamic(() => import('react-simplemde-editor'), {
   ssr: false
 });
 
+const statusMap: Record<Status, { label: string, value: 'OPEN' | 'IN_PROGRESS' | 'CLOSED'; }> = {
+  OPEN: { label: 'Open', value: 'OPEN' },
+  IN_PROGRESS: { label: 'In Progress', value: 'IN_PROGRESS' },
+  CLOSED: { label: 'Closed', value: 'CLOSED' }
+};
+
 const IssueForm = ({ issue }: { issue?: Issue; }) => {
   const { register, control, handleSubmit, formState: { errors } } = useForm<TIssueForm>({
-    resolver: zodResolver(createIssueSchema)
+    resolver: zodResolver(issueSchema)
   });
 
   const router = useRouter();
@@ -57,13 +63,28 @@ const IssueForm = ({ issue }: { issue?: Issue; }) => {
         </TextField.Root>
         {errors.title && <ErrorMessage error={errors.title.message} />}
         <Controller
+          name="status"
+          control={control}
+          defaultValue={issue?.status ?? 'OPEN'}
+          render={({ field }) => (
+            <Select.Root {...field} value={field.value} onValueChange={field.onChange}>
+              <Select.Trigger />
+              <Select.Content position="popper">
+                {Object.values(statusMap).map(status => (
+                  <Select.Item key={status.value} value={status.value}>{status.label}</Select.Item>
+                ))}
+              </Select.Content>
+            </Select.Root>
+          )}
+        />
+        <Controller
           name="description"
           control={control}
           defaultValue={issue?.description}
           render={({ field }) => <SimpleMDE placeholder="Description" {...field} />}
         />
         {errors.description && <ErrorMessage error={errors.description.message} />}
-        <Button disabled={isSubmitting}>
+        <Button disabled={isSubmitting} className="block">
           {issue ? 'Update Issue' : 'Submit New Issue'}{' '}
           {isSubmitting && <Spinner />}
         </Button>
