@@ -2,11 +2,12 @@ import { Suspense } from 'react';
 import IssueActions from './_components/IssueActions';
 import IssuesTable from './_components/IssuesTable';
 import IssuesTableSkeleton from './_components/IssuesTableSkeleton';
-import { Status } from '@prisma/client';
+import { Issue, Status } from '@prisma/client';
 
 interface Props {
   searchParams: {
     status: Status;
+    orderBy: keyof Issue;
   };
 }
 
@@ -15,7 +16,7 @@ const IssuesPage = ({ searchParams }: Props) => {
     <div>
       <IssueActions />
       <Suspense fallback={<IssuesTableSkeleton />}>
-        <IssuesTable filter={searchParams.status} />
+        <IssuesTable searchParams={searchParams} />
       </Suspense>
     </div>
   );
