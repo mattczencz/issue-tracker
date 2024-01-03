@@ -5,7 +5,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import Navbar from './Navbar';
 import { Container, Theme } from '@radix-ui/themes';
-import AuthProvider from './auth/provider';
+import AuthProvider from './auth/Provider';
 import QueryClientProvider from './QueryClientProvider';
 
 const inter = Inter({
