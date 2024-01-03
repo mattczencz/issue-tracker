@@ -1,9 +1,14 @@
 import prisma from '@/prisma/client';
 import { Table } from '@radix-ui/themes';
 import { TextLink, IssueStatusBadge } from '@/app/components';
+import { Status } from '@prisma/client';
 
-const IssuesTable = async () => {
-  const issues = await prisma.issue.findMany();
+const IssuesTable = async ({ filter }: { filter: Status; }) => {
+  const statuses = Object.values(Status);
+  const status = statuses.includes(filter) ? filter : undefined;
+  const issues = await prisma.issue.findMany({
+    where: { status }
+  });
 
   return (
     <Table.Root variant="surface">
@@ -18,7 +23,7 @@ const IssuesTable = async () => {
         {issues.map(issue => (
           <Table.Row key={issue.id}>
             <Table.Cell>
-              <TextLink href={`/issues/${ issue.id }`}>
+              <TextLink href={`/issues/${issue.id}`}>
                 {issue.title}
               </TextLink>
               <div className="block md:hidden">
