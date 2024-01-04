@@ -60,7 +60,7 @@ const IssuesTable = async ({ searchParams }: Props) => {
                 {column.value === searchParams.orderBy && <ArrowUpIcon className="inline" height="12px" />}
               </Table.ColumnHeaderCell>
             ))}
-            <Table.ColumnHeaderCell>Assigned To</Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell className="hidden md:table-cell">Assigned To</Table.ColumnHeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
