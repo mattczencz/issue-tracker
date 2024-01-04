@@ -3,6 +3,7 @@ import IssueActions from './_components/IssueActions';
 import IssuesTable from './_components/IssuesTable';
 import IssuesTableSkeleton from './_components/IssuesTableSkeleton';
 import { Issue, Status } from '@prisma/client';
+import { Metadata } from 'next';
 
 interface Props {
   searchParams: {
@@ -23,3 +24,8 @@ const IssuesPage = ({ searchParams }: Props) => {
   );
 };
 export default IssuesPage;
+
+export const metadata: Metadata = {
+  title: 'Issue Tracker - Issues',
+  description: 'View all project issues'
+};
