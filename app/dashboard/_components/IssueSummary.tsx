@@ -22,14 +22,15 @@ const IssueSummary = ({ open, inProgress, closed }: Props) => {
   ];
 
   return (
-    // TODO: Refactor to make the card the link so entire element is clickable
     <Flex gap="4">
       {containers.map(({ label, status, value }) => (
-        <Card key={label}>
-          <Flex direction="column" gap="2">
-            <Link href={`/issues?status=${status}`} className="font-medium text-sm">{label}</Link>
-            <Text size="4" className="font-bold">{value}</Text>
-          </Flex>
+        <Card asChild key={label}>
+          <Link href={`/issues?status=${status}`}>
+            <Flex direction="column" gap="2">
+              <Text size="3" className="font-medium">{label}</Text>
+              <Text size="4" className="font-bold">{value}</Text>
+            </Flex>
+          </Link>
         </Card>
       ))}
     </Flex>

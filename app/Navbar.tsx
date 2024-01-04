@@ -78,9 +78,9 @@ const AuthLinks = () => {
               {session!.user!.email}
             </Text>
           </DropdownMenu.Label>
-          <DropdownMenu.Item >
-            <Link href="/api/auth/signout">Sign Out</Link>
-          </DropdownMenu.Item>
+          <Link href="/api/auth/signout">
+            <DropdownMenu.Item className="hover:cursor-pointer">Sign Out</DropdownMenu.Item>
+          </Link>
         </DropdownMenu.Content>
       </DropdownMenu.Root>
     </Box>

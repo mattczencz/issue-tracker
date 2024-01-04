@@ -19,18 +19,18 @@ const LatestIssues = async () => {
         <Table.Body>
           {issues.map(issue => (
             <Table.Row key={issue.id}>
-              <Table.Cell>
-                <Flex justify="between" align="center">
-                  <Flex direction="column" align="start" gap="2">
-                    <Link href={`/issues/${issue.id}`}>
+              <Table.Cell className="hover:bg-gray-50">
+                <Link href={`/issues/${issue.id}`}>
+                  <Flex justify="between" align="center">
+                    <Flex direction="column" align="start" gap="2">
                       {issue.title}
-                    </Link>
-                    <IssueStatusBadge status={issue.status} />
+                      <IssueStatusBadge status={issue.status} />
+                    </Flex>
+                    {issue.assignedToUser && (
+                      <Avatar src={issue.assignedToUser.image!} fallback="?" size="2" radius="full" />
+                    )}
                   </Flex>
-                  {issue.assignedToUser && (
-                    <Avatar src={issue.assignedToUser.image!} fallback="?" size="2" radius="full" />
-                  )}
-                </Flex>
+                </Link>
               </Table.Cell>
             </Table.Row>
           ))}
