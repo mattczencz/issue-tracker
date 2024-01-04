@@ -1,5 +1,5 @@
 import prisma from '@/prisma/client';
-import { Flex, Table } from '@radix-ui/themes';
+import { Avatar, Flex, Table } from '@radix-ui/themes';
 import { TextLink, IssueStatusBadge, Pagination } from '@/app/components';
 import { Issue, Status } from '@prisma/client';
 import Link from 'next/link';
@@ -23,7 +23,7 @@ const IssuesTable = async ({ searchParams }: Props) => {
   const columns: TableColumn[] = [
     { label: 'Issue', value: 'title' },
     { label: 'Status', value: 'status', className: 'hidden md:table-cell' },
-    { label: 'Created', value: 'createdAt', className: 'hidden md:table-cell' }
+    { label: 'Created', value: 'createdAt', className: 'hidden md:table-cell' },
   ];
   const statuses = Object.values(Status);
   const status = statuses.includes(searchParams.status) ? searchParams.status : undefined;
@@ -39,7 +39,10 @@ const IssuesTable = async ({ searchParams }: Props) => {
     where,
     orderBy,
     skip: (page - 1) * pageSize,
-    take: pageSize
+    take: pageSize,
+    include: {
+      assignedToUser: true
+    }
   });
 
   const totalIssues = await prisma.issue.count({ where });
@@ -50,13 +53,14 @@ const IssuesTable = async ({ searchParams }: Props) => {
         <Table.Header>
           <Table.Row>
             {columns.map(column => (
-              <Table.ColumnHeaderCell key={column.value}>
+              <Table.ColumnHeaderCell key={column.value} className={column.className}>
                 <Link href={{ query: { ...searchParams, orderBy: column.value } }}>
                   {column.label}
                 </Link>
                 {column.value === searchParams.orderBy && <ArrowUpIcon className="inline" height="12px" />}
               </Table.ColumnHeaderCell>
             ))}
+            <Table.ColumnHeaderCell>Assigned To</Table.ColumnHeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
@@ -74,6 +78,12 @@ const IssuesTable = async ({ searchParams }: Props) => {
                 <IssueStatusBadge status={issue.status} />
               </Table.Cell>
               <Table.Cell className="hidden md:table-cell">{issue.createdAt.toDateString()}</Table.Cell>
+              <Table.Cell className="hidden md:table-cell">
+                {issue.assignedToUser
+                  ? <Avatar size="2" radius="full" src={issue.assignedToUser.image!} fallback="?" />
+                  : 'Unassigned'
+                }
+              </Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>
