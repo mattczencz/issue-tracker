@@ -28,7 +28,7 @@ export default function Error({
         Ah! Bugs! <span className="animate-pulse inline-block"><AiFillBug /></span>
       </Heading>
       <Text align="center">
-        <strong>Oops!</strong> Something went wrong. But don't worry! Let's try again.
+        <strong>Oops!</strong> Something went wrong. But don&apos;t worry! Let&apos;s try again.
       </Text>
       <Button className="hover:cursor-pointer" mt="2" onClick={() => reset()}>
         Try again

@@ -12,7 +12,7 @@ const NotFound = () => {
     >
       <Heading size={{ initial: "8", md: "9" }}>404</Heading>
       <Text align="center">
-        <strong>Uh oh!</strong> We couldn't find what you were looking for.<br />(In context of bugs... maybe that's a good thing?)
+        <strong>Uh oh!</strong> We couldn&apos;t find what you were looking for.<br />(In context of bugs... maybe that&apos;s a good thing?)
       </Text>
       <Button asChild mt="2">
         <Link href="/">Back to Home</Link>
