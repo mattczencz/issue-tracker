@@ -1,7 +1,5 @@
-const IssuesLoadingPage = () => {
-  // TODO: Create an actual loading graphic
-  return (
-    <div>IssuesLoadingPage</div>
-  );
-};
+import LoadingMessage from '../components/LoadingMessage';
+
+const IssuesLoadingPage = () => <LoadingMessage />;
+
 export default IssuesLoadingPage;

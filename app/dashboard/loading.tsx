@@ -1,7 +1,5 @@
-const DashboardLoadingPage = () => {
-  // TODO: Create an actual loading graphic
-  return (
-    <div>Loading...</div>
-  );
-};
+import LoadingMessage from '../components/LoadingMessage';
+
+const DashboardLoadingPage = () => <LoadingMessage />;
+
 export default DashboardLoadingPage;
