@@ -23,6 +23,6 @@ const Dashboard = async () => {
 export default Dashboard;
 
 export const metadata: Metadata = {
-  title: 'Issue Tracker - Dashboard',
+  title: 'TrackFlow - Dashboard',
   description: 'View a summary of project issues'
 };

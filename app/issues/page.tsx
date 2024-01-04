@@ -26,6 +26,6 @@ const IssuesPage = ({ searchParams }: Props) => {
 export default IssuesPage;
 
 export const metadata: Metadata = {
-  title: 'Issue Tracker - Issues',
+  title: 'TrackFlow - Issues',
   description: 'View all project issues'
 };
