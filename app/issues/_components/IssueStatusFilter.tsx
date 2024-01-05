@@ -26,10 +26,10 @@ const IssueStatusFilter = () => {
       const query = params.size ? '?' + params.toString() : '';
       router.push('/issues' + query);
     }}>
-      <Select.Trigger placeholder="Filter by status..." />
+      <Select.Trigger placeholder="Filter by status..." className="hover:cursor-pointer" />
       <Select.Content position="popper">
         {statuses.map(status => (
-          <Select.Item key={status.value} value={status.value}>
+          <Select.Item key={status.value} value={status.value} className="hover:cursor-pointer">
             {status.label}
           </Select.Item>
         ))}

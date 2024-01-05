@@ -26,7 +26,7 @@ const DeleteIssueButton = ({ issueId }: { issueId: number; }) => {
     <>
       <AlertDialog.Root>
         <AlertDialog.Trigger>
-          <Button color="red" disabled={isDeleting}>
+          <Button color="red" disabled={isDeleting} className="hover:enabled:cursor-pointer">
             Delete Issue
             {isDeleting && <Spinner />}
           </Button>
@@ -38,10 +38,10 @@ const DeleteIssueButton = ({ issueId }: { issueId: number; }) => {
           </AlertDialog.Description>
           <Flex gap="3" mt="4">
             <AlertDialog.Cancel>
-              <Button variant="soft" color="gray">Cancel</Button>
+              <Button variant="soft" color="gray" className="hover:cursor-pointer">Cancel</Button>
             </AlertDialog.Cancel>
             <AlertDialog.Action>
-              <Button color="red" onClick={handleDelete}>Delete Issue</Button>
+              <Button color="red" onClick={handleDelete} className="hover:cursor-pointer">Delete Issue</Button>
             </AlertDialog.Action>
           </Flex>
         </AlertDialog.Content>
@@ -51,7 +51,15 @@ const DeleteIssueButton = ({ issueId }: { issueId: number; }) => {
         <AlertDialog.Content>
           <AlertDialog.Title>Error</AlertDialog.Title>
           <AlertDialog.Description>This issue could not be deleted.</AlertDialog.Description>
-          <Button color="gray" variant="soft" mt="4" onClick={() => setError(false)}>Continue</Button>
+          <Button
+            color="gray"
+            variant="soft"
+            mt="4"
+            onClick={() => setError(false)}
+            className="hover:cursor-pointer"
+          >
+            Continue
+          </Button>
         </AlertDialog.Content>
       </AlertDialog.Root>
     </>

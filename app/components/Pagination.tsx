@@ -24,17 +24,17 @@ const Pagination = ({ itemCount, pageSize, currentPage }: Props) => {
 
   return (
     <Flex align="center" gap="4">
-      <Button variant="ghost" disabled={currentPage === 1} onClick={() => changePage(1)}>
+      <Button className="hover:enabled:cursor-pointer" variant="ghost" disabled={currentPage === 1} onClick={() => changePage(1)}>
         <DoubleArrowLeftIcon />
       </Button>
-      <Button variant="ghost" disabled={currentPage === 1} onClick={() => changePage(currentPage - 1)}>
+      <Button className="hover:enabled:cursor-pointer" variant="ghost" disabled={currentPage === 1} onClick={() => changePage(currentPage - 1)}>
         <ChevronLeftIcon />
       </Button>
       <Text size="2">Page {currentPage} of {pageCount}</Text>
-      <Button variant="ghost" disabled={currentPage === pageCount} onClick={() => changePage(currentPage + 1)}>
+      <Button className="hover:enabled:cursor-pointer" variant="ghost" disabled={currentPage === pageCount} onClick={() => changePage(currentPage + 1)}>
         <ChevronRightIcon />
       </Button>
-      <Button variant="ghost" disabled={currentPage === pageCount} onClick={() => changePage(pageCount)}>
+      <Button className="hover:enabled:cursor-pointer" variant="ghost" disabled={currentPage === pageCount} onClick={() => changePage(pageCount)}>
         <DoubleArrowRightIcon />
       </Button>
     </Flex>

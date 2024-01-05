@@ -6,9 +6,9 @@ const IssueActions = () => {
   return (
     <Flex mb="6" justify="between">
       <IssueStatusFilter />
-      <Link href="/issues/new">
-        <Button className="hover:cursor-pointer">New Issue</Button>
-      </Link>
+      <Button asChild>
+        <Link href="/issues/new">New Issue</Link>
+      </Button>
     </Flex>
   );
 };

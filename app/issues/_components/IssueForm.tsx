@@ -68,10 +68,10 @@ const IssueForm = ({ issue }: { issue?: Issue; }) => {
           defaultValue={issue?.status ?? 'OPEN'}
           render={({ field }) => (
             <Select.Root {...field} value={field.value} onValueChange={field.onChange}>
-              <Select.Trigger />
+              <Select.Trigger className="hover:cursor-pointer" />
               <Select.Content position="popper">
                 {Object.values(statusMap).map(status => (
-                  <Select.Item key={status.value} value={status.value}>{status.label}</Select.Item>
+                  <Select.Item className="hover:cursor-pointer" key={status.value} value={status.value}>{status.label}</Select.Item>
                 ))}
               </Select.Content>
             </Select.Root>
@@ -84,7 +84,7 @@ const IssueForm = ({ issue }: { issue?: Issue; }) => {
           render={({ field }) => <SimpleMDE placeholder="Description" {...field} />}
         />
         {errors.description && <ErrorMessage error={errors.description.message} />}
-        <Button disabled={isSubmitting} className="block">
+        <Button disabled={isSubmitting} className="block hover:enabled:cursor-pointer">
           {issue ? 'Update Issue' : 'Submit New Issue'}{' '}
           {isSubmitting && <Spinner />}
         </Button>

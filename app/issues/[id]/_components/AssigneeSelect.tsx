@@ -30,13 +30,13 @@ const AssigneeSelect = ({ issue }: { issue: Issue; }) => {
         defaultValue={issue.assignedToUserId || 'null'}
         onValueChange={assignIssue}
       >
-        <Select.Trigger placeholder="Assign issue..." />
+        <Select.Trigger placeholder="Assign issue..." className="hover:cursor-pointer" />
         <Select.Content>
           <Select.Group>
             <Select.Label>Suggestions</Select.Label>
-            <Select.Item value="null">Unassigned</Select.Item>
+            <Select.Item value="null" className="hover:cursor-pointer">Unassigned</Select.Item>
             {users?.map(user => (
-              <Select.Item key={user.id} value={user.id}>{user.name}</Select.Item>
+              <Select.Item key={user.id} value={user.id} className="hover:cursor-pointer">{user.name}</Select.Item>
             ))}
           </Select.Group>
         </Select.Content>
