@@ -54,7 +54,7 @@ const IssuesTable = async ({ searchParams }: Props) => {
           <Table.Row>
             {columns.map(column => (
               <Table.ColumnHeaderCell key={column.value} className={column.className}>
-                <Link href={{ query: { ...searchParams, orderBy: column.value } }}>
+                <Link href={{ query: { ...searchParams, orderBy: column.value } }} className="underline underline-offset-2">
                   {column.label}
                 </Link>
                 {column.value === searchParams.orderBy && <ArrowUpIcon className="inline" height="12px" />}
