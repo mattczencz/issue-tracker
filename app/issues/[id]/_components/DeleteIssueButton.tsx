@@ -26,7 +26,14 @@ const DeleteIssueButton = ({ issueId }: { issueId: number; }) => {
     <>
       <AlertDialog.Root>
         <AlertDialog.Trigger>
-          <Button color="red" disabled={isDeleting} className="hover:enabled:cursor-pointer">
+          <Button
+            color="red"
+            disabled={isDeleting}
+            className="hover:enabled:cursor-pointer hover:!bg-[#dc3e42]" // Fix for Vercel transparency
+            style={{
+              backgroundColor: 'var(--accent-9)'
+            }}
+          >
             Delete Issue
             {isDeleting && <Spinner />}
           </Button>
