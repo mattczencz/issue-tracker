@@ -1,5 +1,5 @@
 import { Box, Flex, Heading } from '@radix-ui/themes';
-import { AiFillBug } from 'react-icons/ai';
+import { TbPointerSearch } from 'react-icons/tb';
 
 const LoadingMessage = () => {
   return (
@@ -11,7 +11,7 @@ const LoadingMessage = () => {
       gap="4"
     >
       <Box className="text-4xl animate-bounce">
-        <AiFillBug />
+        <TbPointerSearch />
       </Box>
       <Heading>Loading...</Heading>
     </Flex>

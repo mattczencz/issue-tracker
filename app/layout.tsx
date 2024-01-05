@@ -15,7 +15,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: 'TrackFlow',
-  description: 'Track all of your issues with ease',
+  description: 'Keep your projects on the fast track to success with TrackFlow, the intuitive task tracking app designed to streamline your workflow and boost productivity.',
 };
 
 export default function RootLayout({

@@ -6,14 +6,14 @@ import classNames from 'classnames';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { AiFillBug } from 'react-icons/ai';
+import { TbPointerSearch } from 'react-icons/tb';
 
 const Navbar = () => {
   return (
     <nav className="border-b mb-6 px-6 py-4">
       <Flex justify="between">
         <Flex align="center" gap="4">
-          <Link href="/" className="text-xl"><AiFillBug /></Link>
+          <Link href="/" className="text-xl"><TbPointerSearch /></Link>
           <NavLinks />
         </Flex>
         <AuthLinks />
