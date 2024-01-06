@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 const LatestIssues = async () => {
   const issues = await prisma.issue.findMany({
-    orderBy: { createdAt: 'desc' },
+    orderBy: { id: 'desc' },
     take: 5,
     include: {
       assignedToUser: true
@@ -40,3 +40,5 @@ const LatestIssues = async () => {
   );
 };
 export default LatestIssues;
+
+export const dynamic = 'force-dynamic';
