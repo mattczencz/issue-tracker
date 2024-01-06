@@ -1,7 +1,6 @@
 'use client';
 
 import { Skeleton } from '@/app/components';
-import { minutesToMilliseconds } from '@/app/lib/helpers';
 import { Issue, User } from '@prisma/client';
 import { Select } from '@radix-ui/themes';
 import { useQuery } from '@tanstack/react-query';
