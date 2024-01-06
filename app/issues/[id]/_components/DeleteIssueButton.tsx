@@ -29,7 +29,7 @@ const DeleteIssueButton = ({ issueId }: { issueId: number; }) => {
           <Button
             color="red"
             disabled={isDeleting}
-            className="hover:enabled:cursor-pointer hover:!bg-[#dc3e42]" // Fix for Vercel transparency
+            className="hover:enabled:cursor-pointer hover:!bg-[var(--accent-10)]" // Fix for TW Preflight transparency
             style={{
               backgroundColor: 'var(--accent-9)'
             }}
@@ -48,7 +48,16 @@ const DeleteIssueButton = ({ issueId }: { issueId: number; }) => {
               <Button variant="soft" color="gray" className="hover:cursor-pointer">Cancel</Button>
             </AlertDialog.Cancel>
             <AlertDialog.Action>
-              <Button color="red" onClick={handleDelete} className="hover:cursor-pointer">Delete Issue</Button>
+              <Button
+                color="red"
+                onClick={handleDelete}
+                className="hover:enabled:cursor-pointer hover:!bg-[var(--accent-10)]" // Fix for TW Preflight transparency
+                style={{
+                  backgroundColor: 'var(--accent-9)'
+                }}
+              >
+                Delete Issue
+              </Button>
             </AlertDialog.Action>
           </Flex>
         </AlertDialog.Content>
