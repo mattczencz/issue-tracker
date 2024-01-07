@@ -4,6 +4,7 @@ import IssuesTable from './_components/IssuesTable';
 import IssuesTableSkeleton from './_components/IssuesTableSkeleton';
 import { Issue, Status } from '@prisma/client';
 import { Metadata } from 'next';
+import SortingButtons from './_components/SortingButtons';
 
 interface Props {
   searchParams: {
@@ -17,6 +18,7 @@ const IssuesPage = ({ searchParams }: Props) => {
   return (
     <div>
       <IssueActions />
+      <SortingButtons searchParams={searchParams} />
       <Suspense fallback={<IssuesTableSkeleton />}>
         <IssuesTable searchParams={searchParams} />
       </Suspense>

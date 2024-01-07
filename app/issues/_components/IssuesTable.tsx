@@ -2,8 +2,6 @@ import prisma from '@/prisma/client';
 import { Avatar, Flex, Table } from '@radix-ui/themes';
 import { TextLink, IssueStatusBadge, Pagination } from '@/app/components';
 import { Issue, Status } from '@prisma/client';
-import Link from 'next/link';
-import { ArrowUpIcon } from '@radix-ui/react-icons';
 
 type TableColumn = {
   label: string;
@@ -54,10 +52,7 @@ const IssuesTable = async ({ searchParams }: Props) => {
           <Table.Row>
             {columns.map(column => (
               <Table.ColumnHeaderCell key={column.value} className={column.className}>
-                <Link href={{ query: { ...searchParams, orderBy: column.value } }} className="underline underline-offset-2">
-                  {column.label}
-                </Link>
-                {column.value === searchParams.orderBy && <ArrowUpIcon className="inline" height="12px" />}
+                {column.label}
               </Table.ColumnHeaderCell>
             ))}
             <Table.ColumnHeaderCell className="hidden md:table-cell">Assigned To</Table.ColumnHeaderCell>
