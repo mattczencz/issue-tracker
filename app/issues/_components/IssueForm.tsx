@@ -1,8 +1,9 @@
 'use client';
 import issueSchema, { TIssueForm } from '@/app/api/issues/issueSchema';
 import { ErrorMessage, Spinner } from '@/app/components';
+import { statusMap } from '@/app/lib/constants';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Issue, Status } from '@prisma/client';
+import { Issue } from '@prisma/client';
 import { Button, Callout, Select, TextField } from '@radix-ui/themes';
 import axios from 'axios';
 import 'easymde/dist/easymde.min.css';
@@ -14,12 +15,6 @@ import { Controller, useForm } from 'react-hook-form';
 const SimpleMDE = dynamic(() => import('react-simplemde-editor'), {
   ssr: false
 });
-
-const statusMap: Record<Status, { label: string, value: 'OPEN' | 'IN_PROGRESS' | 'CLOSED'; }> = {
-  OPEN: { label: 'Open', value: 'OPEN' },
-  IN_PROGRESS: { label: 'In Progress', value: 'IN_PROGRESS' },
-  CLOSED: { label: 'Closed', value: 'CLOSED' }
-};
 
 const IssueForm = ({ issue }: { issue?: Issue; }) => {
   const { register, control, handleSubmit, formState: { errors } } = useForm<TIssueForm>({
