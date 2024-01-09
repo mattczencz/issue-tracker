@@ -1,25 +1,28 @@
 export const dynamic = 'force-dynamic';
 
 import prisma from '@/prisma/client';
-import { Flex, Grid } from '@radix-ui/themes';
+import { Flex } from '@radix-ui/themes';
+import { Metadata } from 'next';
 import IssueChart from './_components/IssueChart';
 import IssueSummary from './_components/IssueSummary';
 import LatestIssues from './_components/LatestIssues';
-import { Metadata } from 'next';
+import UserIssues from './_components/UserIssues';
 
 const Dashboard = async () => {
+  const total = await prisma.issue.count();
   const open = await prisma.issue.count({ where: { status: 'OPEN' } });
   const inProgress = await prisma.issue.count({ where: { status: 'IN_PROGRESS' } });
   const closed = await prisma.issue.count({ where: { status: 'CLOSED' } });
 
   return (
-    <Grid columns={{ initial: '1', md: '2' }} gap="6">
+    <section className="flex flex-col lg:grid lg:grid-cols-2 gap-8">
       <Flex direction="column" gap="6">
-        <IssueSummary open={open} inProgress={inProgress} closed={closed} />
+        <IssueSummary total={total} open={open} inProgress={inProgress} closed={closed} />
         <IssueChart open={open} inProgress={inProgress} closed={closed} />
       </Flex>
       <LatestIssues />
-    </Grid>
+      <UserIssues />
+    </section>
   );
 };
 export default Dashboard;
