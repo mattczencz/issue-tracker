@@ -5,7 +5,12 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-const DeleteIssueButton = ({ issueId }: { issueId: number; }) => {
+interface Props {
+  issueId: number;
+  disabled: boolean;
+}
+
+const DeleteIssueButton = ({ issueId, disabled }: Props) => {
   const router = useRouter();
   const [error, setError] = useState(false);
   const [isDeleting, setDeleting] = useState(false);
@@ -28,8 +33,8 @@ const DeleteIssueButton = ({ issueId }: { issueId: number; }) => {
         <AlertDialog.Trigger>
           <Button
             color="red"
-            disabled={isDeleting}
-            className="hover:enabled:cursor-pointer hover:!bg-[var(--accent-10)]" // Fix for TW Preflight transparency
+            disabled={isDeleting || disabled}
+            className="hover:enabled:cursor-pointer hover:!bg-[var(--accent-10)] disabled:hover:!bg-[var(--accent-9)]" // Fix for TW Preflight transparency
             style={{
               backgroundColor: 'var(--accent-9)'
             }}

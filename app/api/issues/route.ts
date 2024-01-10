@@ -10,6 +10,13 @@ export async function POST(request: NextRequest) {
   if (!session)
     return NextResponse.json({}, { status: 401 });
 
+  const user = await prisma.user.findUnique({
+    where: { email: session.user!.email! }
+  });
+
+  if (!user)
+    return NextResponse.json({ message: 'Could not find user.' }, { status: 404 });
+
   const body = await request.json();
   const validation = issueSchema.safeParse(body);
 
@@ -20,7 +27,8 @@ export async function POST(request: NextRequest) {
     data: {
       title: body.title,
       description: body.description,
-      status: body.status
+      status: body.status,
+      createdByUserId: user.id,
     }
   });
 

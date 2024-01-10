@@ -19,7 +19,9 @@ model Issue {
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
   assignedToUserId String?  @db.VarChar(255)
-  assignedToUser   User?    @relation(fields: [assignedToUserId], references: [id])
+  createdByUserId  String   @db.VarChar(255)
+  assignedToUser   User?    @relation(fields: [assignedToUserId], references: [id], name: "AssignedToUser")
+  createdByUser    User     @relation(fields: [createdByUserId], references: [id], name: "CreatedByUser")
 }
 
 enum Status {
@@ -63,7 +65,8 @@ model User {
   image          String?
   accounts       Account[]
   sessions       Session[]
-  assignedIssues Issue[]
+  assignedIssues Issue[]   @relation("AssignedToUser")
+  createdIssues  Issue[]   @relation("CreatedByUser")
 }
 
 model VerificationToken {
