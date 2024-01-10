@@ -28,7 +28,7 @@ export default function RootLayout({
       <body className={inter.variable}>
         <QueryClientProvider>
           <AuthProvider>
-            <Theme appearance="light" accentColor="jade" radius="large">
+            <Theme appearance="light" accentColor="jade" radius="full">
               <Navbar />
               <main className="p-6">
                 <Container>{children}</Container>
