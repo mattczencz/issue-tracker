@@ -1,5 +1,6 @@
 import { Issue, Status } from '@prisma/client';
 import { Flex, Button, Text } from '@radix-ui/themes';
+import classNames from 'classnames';
 import Link from 'next/link';
 
 interface Props {
@@ -18,7 +19,7 @@ type TSortingOption = {
 
 const SortingButtons = ({ searchParams }: Props) => {
   const options: TSortingOption[] = [
-    { label: 'Issue', value: 'title', color: 'indigo', },
+    { label: 'Title', value: 'title', color: 'indigo', },
     { label: 'Status', value: 'status', color: 'orange' },
     { label: 'Created', value: 'createdAt', color: 'crimson' },
   ];
@@ -39,7 +40,9 @@ const SortingButtons = ({ searchParams }: Props) => {
             size="1"
             variant="outline"
             color={option.color}
-            className="hover:cursor-pointer"
+            className={classNames({
+              '!hidden lg:!flex': option.label === 'Created'
+            }, 'hover:cursor-pointer')}
           >
             <Link href={{ query: { ...searchParams, orderBy: option.value } }}>
               {option.label}
