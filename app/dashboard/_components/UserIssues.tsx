@@ -24,7 +24,7 @@ const UserIssues = async ({ page }: { page: string; }) => {
   return (
     <Flex direction="column" gap="4" className="col-span-2">
       <Heading>My Issues</Heading>
-      {issues ? (
+      {issues.length ? (
         <Flex direction="column" gap="4">
           <Grid columns={{ initial: "1", sm: "2", md: "3" }} gap="6">
             {issues.map(issue => (
@@ -45,7 +45,7 @@ const UserIssues = async ({ page }: { page: string; }) => {
         </Flex>
       ) : (
         <Flex>
-          <Text>You aren&aps;t currently assigned to any issues.</Text>
+          <Text>You aren&apos;t currently assigned to any issues.</Text>
         </Flex>
       )}
     </Flex>
